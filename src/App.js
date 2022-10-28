@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import {  useState } from 'react'
+import Main from './components/Main'
+import Navbar from './components/Navbar'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [Quotes , setQuotes]=useState([])
+
+  const getData = async()=>{
+    const res = await fetch("https://api.quotable.io/random")
+    const data = await res.json()
+setQuotes(data)
+  }
+
+return (
+    <>
+    <Navbar/>
+
+  <Main Quotes={Quotes} getData={getData} />
+ 
+   </>
+  )
 }
 
-export default App;
+export default App
